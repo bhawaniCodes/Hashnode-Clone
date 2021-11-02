@@ -11,9 +11,13 @@ const FlexBox = styled.div`
 `;
 const NewBack = styled.div`
 padding-top: 1rem;
-padding-bottom: 1.5rem;
+padding-bottom: 1.2rem;
 margin-right: 1rem;
+height: 96%;
 overflow-x: hidden;
+z-index: 1;
+position: fixed;
+background-color: #F5F7FA;
 `
 const SideFlex = styled.div`
 width: 100%;

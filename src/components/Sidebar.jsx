@@ -96,6 +96,7 @@ const UserButton = styled.button`
 const Image = styled.img`
 width:40px;
 margin-top: 20px;
+margin-bottom:20px;
 &:hover{
     background-color: #fff;
 }
