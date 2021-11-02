@@ -157,3 +157,148 @@ export const Login = () => {
         </LoginMainDiv>
     );
 };
+
+const AllA = styled.a`
+    display: flex;
+    width: 12rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border: 1px solid rgb(229, 231, 235);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 1rem;
+
+    & > :nth-child(2) {
+        padding-left: 0.5rem;
+        padding-top: 0.1rem;
+    }
+`;
+
+const AllDivsButton = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    line-height: 1.375;
+`;
+const LogoImageWithName = styled.img`
+    width: 192px;
+    height: 32.32px;
+`;
+const InputSubmitDiv = styled.div`
+    margin-bottom: 4rem;
+`;
+
+const ConnectWithH1 = styled.h1`
+    line-height: 1.25;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 0.5rem !important;
+    margin: 0;
+    color: rgb(97, 97, 97);
+`;
+
+const SubmitButton = styled.button`
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-color: rgb(41, 98, 255);
+    background-color: rgb(41, 98, 255);
+    font-weight: 700;
+    line-height: 1.375;
+    letter-spacing: -0.025em;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 1.1rem;
+`;
+const Input = styled.input`
+    width: 45%;
+    margin-right: 15px;
+    border-radius: 0.5rem;
+    border: 1px solid #aca9a94e;
+    border-width: 1px;
+    background-color: transparent;
+    padding: 1rem;
+    /* outline: 1px solid transparent; */
+    /* outline-offset: 2px; */
+    margin-bottom: 1rem;
+    font-size: 100%;
+
+    &::placeholder {
+        opacity: 0.8;
+    }
+`;
+const SignInSecureLinkH1 = styled.h1`
+    line-height: 1.25;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 0.75rem !important;
+    margin: 0;
+    color: rgb(97, 97, 97);
+`;
+
+const LoginContentDiv = styled.div`
+    padding: 3rem;
+    width: 75%;
+    margin: auto;
+    line-height: 1.375;
+    text-align: left;
+
+    & > :nth-child(1) {
+        margin-bottom: 2.5rem;
+    }
+    & > :nth-child(2) {
+        margin-bottom: 2.5rem;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.375;
+        font-size: 1.125rem;
+        color: rgba(33, 33, 33, 0.9);
+    }
+`;
+
+const LoginMainDiv = styled.div`
+    background-color: #f5f7fa;
+    font-family: Arial, Helvetica, sans-serif;
+`;
+
+const MainDiv = styled.div`
+    background-color: #f5f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    & > div {
+        background-color: #ffffff;
+        width: 66.666667%;
+        margin-left: 5rem;
+        margin-right: 5rem;
+        --tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+            var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+        border-width: 1 px;
+    }
+
+    & > button {
+        position: absolute;
+        background-color: #f5f7fa;
+        left: 3.5rem;
+        top: 3.5rem;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.5rem;
+        color: rgb(55, 65, 81);
+        border: none;
+        cursor: pointer;
+
+        & > :hover {
+            background-color: #d2d5da;
+        }
+    }
+`;
