@@ -7,8 +7,6 @@ import { auth } from "../config/firebase-config";
 
 export const PrivateRoutes = ({ children, path }) => {
     const user = useSelector((data) => data.user);
-    const dispatch = useDispatch();
-    console.log('emailId123:', user)
 
     if (user) {
         return (

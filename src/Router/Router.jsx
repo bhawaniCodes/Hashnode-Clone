@@ -1,5 +1,4 @@
-import { signOut } from "@firebase/auth";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Login } from "../components/Login";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +8,8 @@ import { PrivateRoutes } from "./PrivateRoutes";
 import { useHistory } from "react-router";
 
 export const Router = () => {
+    const [delay, setDelay] = useState(true);
     const user = useSelector((data) => data.user);
-    console.log("user1:", user);
     const history = useHistory();
 
     const dispatch = useDispatch();
@@ -24,17 +23,26 @@ export const Router = () => {
         if (user) history.push("/");
         else history.push("/login");
     });
-
     return (
         <div>
             <Switch>
                 <PrivateRoutes exact path="/">
                     Hello Logged in
-                    <button onClick={logout}>Signout</button>
+                    <button onClick={logout}>logout</button>
+                    <button onClick={() => history.push("/sign")}>
+                        Sign Page
+                    </button>
                 </PrivateRoutes>
                 <Route path="/login">
                     <Login />
                 </Route>
+                {/* <PrivateRoutes path="/sign">
+                    <p>Hello Sign Page</p>
+                    <button onClick={logout}>logout</button>
+                    <button onClick={() => history.push("/")}>
+                        LoggedIn page
+                    </button>
+                </PrivateRoutes> */}
             </Switch>
         </div>
     );

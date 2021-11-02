@@ -19,6 +19,7 @@ import logo_name from "../images/logo_name.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmail } from "../Redux/authReducer/action";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -89,9 +90,9 @@ export const Login = () => {
     return (
         <LoginMainDiv>
             <MainDiv>
-                <button>
+                <Link to='/' >
                     <GrClose />
-                </button>
+                </Link>
                 <div>
                     <LoginContentDiv>
                         <div>
@@ -160,7 +161,7 @@ export const Login = () => {
 
 const AllA = styled.a`
     display: flex;
-    width: 12rem;
+    width: 11rem;
     margin: 0.5rem;
     cursor: pointer;
     padding: 1rem;
@@ -217,7 +218,7 @@ const SubmitButton = styled.button`
     font-size: 1.1rem;
 `;
 const Input = styled.input`
-    width: 45%;
+    width: 40%;
     margin-right: 15px;
     border-radius: 0.5rem;
     border: 1px solid #aca9a94e;
@@ -285,7 +286,7 @@ const MainDiv = styled.div`
         border-width: 1 px;
     }
 
-    & > button {
+    & > a {
         position: absolute;
         background-color: #f5f7fa;
         left: 3.5rem;
