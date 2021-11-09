@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./landing.module.css"
 import styled from "styled-components";
 import Sidebar from "../Sidebar";
+import RightSideBar from "../RightSideBar";
+import AfterLoginCenter from "../AfterLoginCenter";
 
 const FlexBox = styled.div`
   display: flex;
@@ -10,14 +12,19 @@ const FlexBox = styled.div`
   margin: auto;
 `;
 const NewBack = styled.div`
+width: 12%;
 padding-top: 1rem;
 padding-bottom: 1.5rem;
-margin-right: 1rem;
+// margin-right: 1rem;
 overflow-x: hidden;
+position: fixed;
+background-color: #F5F7FA;
 `
 const SideFlex = styled.div`
-width: 100%;
-background-color: #fff;
+width: 61.5%;
+margin: auto;
+margin-right: 1%;
+margin-top: 1%;
 `
 
 function Index() {
@@ -26,7 +33,10 @@ function Index() {
     <div className={styles.masterDiv}>
       <FlexBox>
         <NewBack><Sidebar/></NewBack>
-        <SideFlex>World</SideFlex>
+        <SideFlex>
+            <AfterLoginCenter/>
+        </SideFlex>
+        <RightSideBar/>
       </FlexBox>
       </div>
     </>

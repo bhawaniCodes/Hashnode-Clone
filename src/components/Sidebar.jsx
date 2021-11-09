@@ -4,7 +4,7 @@ import styled from "styled-components";
 const FlexBox = styled.div`
   display: flex;
   width: 11.6rem;
-  height: 100%;
+  height: 95vh;
   flex-direction: column;
   justify-content: space-between;
 `
@@ -30,7 +30,7 @@ const HeadSvg = styled.svg`
 display: block;
   height: 47px;
   width: 10rem;
-  margin-right: 0.75rem;
+//   margin-right: 0.75rem;
   margin-bottom: 1.5rem;
   cursor: pointer;
 `
@@ -86,7 +86,7 @@ const UserButton = styled.button`
     height:50px;
     background: none;
     border: none;
-    z-index: 1;
+    z-index: 0;
     padding: 0 10px 0 10px;
     cursor: pointer;
     &:hover{
@@ -96,6 +96,8 @@ const UserButton = styled.button`
 const Image = styled.img`
 width:40px;
 margin-top: 20px;
+margin-bottom: 4vh;
+cursor: pointer;
 &:hover{
     background-color: #fff;
 }
