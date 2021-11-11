@@ -10,6 +10,7 @@ const FlexBox = styled.div`
   width: 96%;
   height: 100%;
   margin: auto;
+  position: relative;
 `;
 const NewBack = styled.div`
 width: 12%;
@@ -26,6 +27,7 @@ margin: auto;
 margin-right: 1%;
 margin-top: 1%;
 `
+
 
 function Index() {
   return (

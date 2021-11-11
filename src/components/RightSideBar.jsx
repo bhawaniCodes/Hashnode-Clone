@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
+import RightBarFooter from './RightBarFooter';
 import RightBarTopArticle from './RightBarTopArticle';
 import RightBarWriting from './RightBarWriting';
 
@@ -61,11 +62,7 @@ function RightSideBar() {
         </SearchInputBox>
         <TopArticle><RightBarTopArticle/></TopArticle>
         <TopArticle><RightBarWriting/></TopArticle>
-        <TopArticle/>
-        <TopArticle/>
-        <TopArticle/>
-        <TopArticle/>
-        <TopArticle/>
+        <TopArticle><RightBarFooter/></TopArticle>
         
         </BackGroundDiv>
         </>
