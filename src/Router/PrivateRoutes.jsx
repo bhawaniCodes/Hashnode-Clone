@@ -6,7 +6,10 @@ import { auth } from "../config/firebase-config";
 
 
 export const PrivateRoutes = ({ children, path }) => {
-    const user = useSelector((data) => data.user);
+    // const user = useSelector((data) => data.user);
+    let user = JSON.parse(localStorage.getItem("user"));
+    console.log("user:", user);
+    // const user = true;
 
     if (user) {
         return (

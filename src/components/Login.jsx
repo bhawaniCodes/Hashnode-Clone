@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEmail } from "../Redux/authReducer/action";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { NewLogo } from "../images/NewLogo";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -28,17 +29,7 @@ export const Login = () => {
     const user = useSelector((data) => data.user);
     const history = useHistory();
 
-    const handleLoginWithGithub = async () => {
-        // try {
-        //     let userGit = await auth.signInWithRedirect(gitHubProvider);
-        //     console.log('userGit:', userGit)
-        //     dispatch(getEmail(userGit));
-        // } catch (error) {
-        //     console.log(error);
-        // }
-    };
-
-    const handleLoginWithGoogle = async () => {
+    const handleLoginWithGoogle = async() => {
         try {
             await auth.signInWithRedirect(googleProvider);
         } catch (error) {
@@ -72,8 +63,9 @@ export const Login = () => {
                 password
             );
             console.log("login2");
+            // localStorage.setItem("user", JSON.stringify(userData));
             dispatch(getEmail(userData));
-            history.push("/");
+            // history.push("/");
         } catch (error) {
             console.log("login2");
             alert(error.message);
@@ -84,22 +76,20 @@ export const Login = () => {
     const logout = async () => {
         await auth.signOut(auth);
         console.log("logout:", logout);
+        localStorage.removeItem("user");
         dispatch(getEmail(null));
     };
 
     return (
         <LoginMainDiv>
             <MainDiv>
-                <Link to='/' >
+                <Link to="/">
                     <GrClose />
                 </Link>
                 <div>
                     <LoginContentDiv>
                         <div>
-                            <LogoImageWithName
-                                src={logo_name}
-                                alt={logo_name}
-                            />
+                            <NewLogo width="192px" height="32.32px" />
                         </div>
                         <p>Sign in / Create an account</p>
                         <SignInSecureLinkH1>
@@ -123,10 +113,7 @@ export const Login = () => {
                         </InputSubmitDiv>
                         <ConnectWithH1>Or, connect with</ConnectWithH1>
                         <AllDivsButton>
-                            <AllA
-                                onClick={handleLoginWithGithub}
-                                style={{ background: "rgb(51,51,51)" }}
-                            >
+                            <AllA style={{ background: "rgb(51,51,51)" }}>
                                 <BsGithub fontSize="1.5rem" />
                                 <span>GitHub</span>
                             </AllA>
@@ -187,10 +174,7 @@ const AllDivsButton = styled.div`
     margin-right: -0.5rem;
     line-height: 1.375;
 `;
-const LogoImageWithName = styled.img`
-    width: 192px;
-    height: 32.32px;
-`;
+
 const InputSubmitDiv = styled.div`
     margin-bottom: 4rem;
 `;
