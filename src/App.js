@@ -1,11 +1,17 @@
+import { Profile } from "./components/Profile/Profile";
+import Sidebar from "./components/Sidebar";
+import styled from "styled-components";
+// import {UserForm} from "./components/UserForm/UserForm";
 
-import './App.css';
+const Container = styled.div`
+display: flex`;
 
 function App() {
   return (
-    <div className="App">
-     
-    </div>
+    <Container>
+      <Sidebar/>
+     <Profile/>
+    </Container>
   );
 }
 
