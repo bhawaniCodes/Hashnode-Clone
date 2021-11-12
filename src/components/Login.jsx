@@ -31,7 +31,8 @@ export const Login = () => {
 
     const handleLoginWithGoogle = async() => {
         try {
-            await auth.signInWithRedirect(googleProvider);
+            window.open("http://localhost:2266/auth/google/", "_self");
+            // await auth.signInWithRedirect(googleProvider);
         } catch (error) {
             console.log(error);
         }

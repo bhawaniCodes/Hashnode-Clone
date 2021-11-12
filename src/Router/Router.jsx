@@ -8,6 +8,9 @@ import { PrivateRoutes } from "./PrivateRoutes";
 import { useHistory } from "react-router";
 import { Editor } from "../components/Editor/Editor";
 import axios from "axios";
+import Sidebar from "../components/Sidebar";
+import { Profile } from "../components/Profile/Profile";
+import { UserForm } from "../components/UserForm/UserForm";
 
 
 
@@ -42,25 +45,30 @@ export const Router = () => {
     return (
         <div>
             <Switch>
-                <PrivateRoutes exact path="/">
+                <Route exact path="/">
                     Hello Logged in
                     <button onClick={logout}>logout</button>
                     <button onClick={() => history.push("/sign")}>
                         Sign Page
                     </button>
-                </PrivateRoutes>
+                </Route>
                 <Route path="/login">
                     <Login />
                 </Route>
                 <PrivateRoutes path="/create/story">
-                    <Editor/>
+                    <Editor />
                 </PrivateRoutes>
-                <PrivateRoutes path="/sign">
-                    <p>Hello Sign Page</p>
-                    <button onClick={logout}>logout</button>
-                    <button onClick={() => history.push("/")}>
-                        LoggedIn page
-                    </button>
+                <PrivateRoutes path="/profile">
+                    <div style={{display: 'flex'}}>
+                        <Sidebar />
+                        <Profile />
+                    </div>
+                </PrivateRoutes>
+                <PrivateRoutes path="/settings">
+                    <div style={{display: 'flex'}}>
+                        <Sidebar />
+                        <UserForm />
+                    </div>
                 </PrivateRoutes>
             </Switch>
         </div>
