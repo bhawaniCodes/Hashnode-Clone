@@ -1,0 +1,434 @@
+body {
+  --tw-bg-opacity: 1;
+  background-color: rgba(245, 247, 250, var(--tw-bg-opacity));
+}
+
+.heading-container {
+  display: flex;
+  position: absolute;
+  right: 0px;
+  align-items: center;
+  padding: 2.5rem;
+  width: 83.5%;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+  margin: 25px;
+  box-sizing: border-box;
+  text-align: left !important;
+}
+.heading-container-2,
+.heading-container-1,
+.heading-container-title,
+.heading-container-2 > div {
+  display: flex;
+}
+.heading-container-title > p {
+  font-size: 16px;
+  margin: 0px;
+}
+.heading-container-title > p:nth-of-type(2) {
+  margin-left: 10px;
+  --tw-text-opacity: 1;
+  color: rgba(158, 158, 158, var(--tw-text-opacity));
+  cursor: pointer;
+}
+.heading-container-title > p:nth-of-type(2):hover {
+  --tw-text-opacity: 1;
+  color: rgba(41, 98, 255, var(--tw-text-opacity));
+}
+.heading-container-svg {
+  width: 1.5rem;
+  height: 1.25rem;
+}
+.heading-container-2 > div,
+.heading-container-1 {
+  align-items: center;
+  justify-content: center;
+}
+
+.heading-container-logo {
+  width: 4rem;
+  height: 4rem;
+}
+.heading-container-1 > div {
+  margin: 5px;
+}
+.blog-dashboard {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0px;
+}
+.heading-container-2 > div {
+  justify-content: center;
+  width: 25%;
+  padding: 8px;
+}
+.heading-container-2 > div > * {
+  margin: 1px;
+}
+.heading-container-2 > div:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(238, 238, 238, var(--tw-bg-opacity));
+  border-radius: 0.5rem;
+  transition: all 0.2s linear;
+}
+.heading-container-2 > div:nth-of-type(1):hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(227, 242, 253, var(--tw-bg-opacity));
+  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.heading-container-2 {
+  width: 600px;
+  justify-content: space-between;
+}
+.heading-container-2 > div:nth-of-type(1) {
+  --tw-text-opacity: 1;
+  color: rgba(41, 98, 255, var(--tw-text-opacity));
+  cursor: pointer;
+}
+.heading-container-2 > div:nth-of-type(4) button {
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+/* .quick-actions-click {
+  --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-text-opacity: 1;
+  color: rgba(97, 97, 97, var(--tw-text-opacity));
+  width: 16rem;
+}
+.quick-actions-click svg {
+} */
+/* Dashboard Top Card */
+
+/* .... */
+
+.dashboard-card {
+  position: absolute;
+  top: 170px;
+  width: 83.5%;
+  right: 0px;
+  display: flex;
+  padding: 0.3rem;
+  margin: 25px;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+.dashboard-card p {
+  font-style: italic;
+}
+.dashboard-card svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.dashboard-card div {
+  padding: 1.25rem;
+  margin: 15px;
+  border-radius: 0.5rem;
+  align-items: center;
+  width: 55%;
+}
+.dashboard-card > div:nth-of-type(1) {
+  background: linear-gradient(to right, #11998e, #38ef7d);
+}
+.dashboard-card div:nth-of-type(2) {
+  background: linear-gradient(to right, #8f94fb, #4e54c8);
+}
+.dashboard-card div:nth-of-type(3) {
+  background: linear-gradient(to right, #c02425, #f0cb35);
+}
+
+/* .........DashboardSidebar */
+
+.DashboardSidebar {
+  position: absolute;
+  top: 520px;
+  left: 230px;
+  --tw-bg-opacity: 1;
+  background-color: rgba(250, 250, 250, var(--tw-bg-opacity));
+  width: 14rem;
+  --tw-border-opacity: 1;
+  border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+  border: 1px solid rgba(229, 231, 235, var(--tw-border-opacity));
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+.DashboardSidebar svg {
+  width: 2rem;
+  font-weight: 400;
+}
+.DashboardSidebar > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  --tw-text-opacity: 1;
+  color: rgba(51, 51, 51, var(--tw-text-opacity));
+  border-radius: 0.5rem;
+}
+.DashboardSidebar button {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  background-color: transparent;
+  border-radius: 0.5rem;
+  border: none;
+}
+.DashboardSidebar button:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgba(41, 98, 255, var(--tw-bg-opacity));
+}
+.DashboardSidebar button > * {
+  margin: 0 10px;
+}
+/* .DashboardSidebar div:nth-of-type(1) {
+  --tw-bg-opacity: 1;
+  background-color: rgba(41, 98, 255, var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+} */
+.DashboardSidebar div:nth-of-type(1):hover {
+  --tw-text-opacity: 1;
+  color: rgba(51, 51, 51, var(--tw-text-opacity));
+}
+.DashboardSidebar div:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(245, 245, 245, var(--tw-bg-opacity));
+  cursor: pointer;
+}
+.DashboardSidebar div:active {
+  --tw-bg-opacity: 1;
+  background-color: rgba(41, 98, 255, var(--tw-bg-opacity));
+}
+.DashboardSidebar span > * {
+  text-decoration: none;
+  --tw-text-opacity: 1;
+  color: rgba(51, 51, 51, var(--tw-text-opacity));
+}
+.border-sidebar {
+  --tw-border-opacity: 1;
+  border: 0.7px solid rgba(229, 231, 235, var(--tw-border-opacity));
+}
+
+/* .....general-setting */
+
+.general-setting {
+  position: absolute;
+  top: 520px;
+  left: 480px;
+  padding: 1.25rem;
+  width: 67%;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+  box-sizing: border-box;
+}
+.general-setting > div {
+  margin-bottom: 1.5rem;
+}
+.general-setting input {
+  width: 90%;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  background-color: transparent;
+  padding: 1rem;
+  --tw-border-opacity: 1;
+  border: 1px solid rgba(210, 220, 235, var(--tw-border-opacity));
+}
+.general-setting input:focus {
+  --tw-text-opacity: 1;
+
+  outline: 1px solid rgba(41, 98, 255, var(--tw-text-opacity));
+}
+.general-setting > div > * {
+  margin: 1rem;
+}
+.general-setting h2 {
+  margin-top: 0px !important;
+}
+.general-setting > div > label {
+  --tw-text-opacity: 1;
+  color: rgba(33, 33, 33, var(--tw-text-opacity));
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25rem;
+}
+.general-setting > div:nth-of-type(12) > button {
+  display: flex;
+  --tw-text-opacity: 1;
+  color: rgba(41, 98, 255, var(--tw-text-opacity));
+  width: 150px;
+  align-items: center;
+  justify-content: center;
+  padding: 13px;
+  --tw-border-opacity: 1;
+  font-size: 1rem;
+  border: 2px solid rgba(41, 98, 255, var(--tw-text-opacity));
+  font-weight: 700;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  line-height: 1.375;
+  background: none;
+}
+.general-setting > div:nth-of-type(12) > button > * {
+  margin: 5px;
+}
+.general-setting > div:nth-of-type(12) > button > svg {
+  width: 20%;
+  --tw-text-opacity: 1;
+
+  fill: rgba(41, 98, 255, var(--tw-text-opacity));
+  cursor: pointer;
+}
+
+/* drafts */
+
+.drafts {
+  position: absolute;
+  top: 520px;
+  left: 480px;
+  padding: 1.25rem;
+  width: 64%;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
+
+.drafts > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+.drafts > div > div > p {
+  --tw-text-opacity: 1;
+  color: rgba(97, 97, 97, var(--tw-text-opacity));
+}
+.drafts > div > div:nth-of-type(2) > button:nth-of-type(1) {
+  --tw-bg-opacity: 1;
+  background-color: transparent;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgba(41, 98, 255, var(--tw-border-opacity));
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  color: rgba(41, 98, 255, var(--tw-border-opacity));
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  cursor: pointer;
+}
+.drafts > div > div:nth-of-type(2) > button:nth-of-type(2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: transparent;
+  background-color: transparent;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  --tw-text-opacity: 1;
+  color: rgba(55, 65, 81, var(--tw-text-opacity));
+}
+.drafts > div > div:nth-of-type(2) > button:nth-of-type(2):hover {
+  color: red;
+  --tw-bg-opacity: 1;
+  background-color: rgba(238, 238, 238, var(--tw-bg-opacity));
+}
+
+/* appreance */
+
+.select-image {
+  --tw-text-opacity: 1;
+  color: rgba(97, 97, 97, var(--tw-text-opacity));
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  --tw-bg-opacity: 1;
+  background-color: rgba(238, 238, 238, var(--tw-bg-opacity));
+  width: 60%;
+}
+.select-image svg {
+  width: 2.5rem;
+  --tw-text-opacity: 1;
+  fill: rgba(97, 97, 97, var(--tw-text-opacity));
+}
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 0.25rem;
+  --tw-border-opacity: 1;
+  border: 1px solid rgba(229, 231, 235, var(--tw-border-opacity));
+}
+.checkbox p {
+  width: 500%;
+  color: #000;
+}
+.update > button {
+  display: flex;
+  --tw-text-opacity: 1;
+  color: rgba(41, 98, 255, var(--tw-text-opacity));
+  width: 150px;
+  align-items: center;
+  justify-content: center;
+  padding: 13px;
+  --tw-border-opacity: 1;
+  font-size: 1rem;
+  border: 2px solid rgba(41, 98, 255, var(--tw-text-opacity));
+  font-weight: 700;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  line-height: 1.375;
+  background: none;
+}
+.update > button > * {
+  margin: 5px;
+}
+.update > button > svg {
+  width: 20%;
+  --tw-text-opacity: 1;
+  fill: rgba(41, 98, 255, var(--tw-text-opacity));
+  cursor: pointer;
+}
