@@ -1,56 +1,61 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useParams } from "react-router-dom";
 import { Login } from "../components/Login";
-import { useDispatch, useSelector } from "react-redux";
-import { getEmail } from "../Redux/authReducer/action";
 import { auth } from "../config/firebase-config";
 import { PrivateRoutes } from "./PrivateRoutes";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { Editor } from "../components/Editor/Editor";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import { Profile } from "../components/Profile/Profile";
 import { UserForm } from "../components/UserForm/UserForm";
+import MasterIndex from "../components/MasterPage/MasterInex";
+import Index from "../components/Landing Page/IndexAfterLogin";
+import Details from "../components/Details";
+import Settings from "../components/Dashboard/Settings";
+import Drafts from "../components/Dashboard/Drafts";
+import Appearance from "../components/Dashboard/Appearance";
+import Posts from "../components/Dashboard/Posts";
 
+
+
+const commonUrl = process.env.REACT_APP_COMMON_URL;
 
 
 export const Router = () => {
-    const user = useSelector((data) => data.user);
+    const location = useLocation();
     const history = useHistory();
-    const dispatch = useDispatch();
-    const commonUrl = process.env.REACT_APP_COMMON_URL;
     const logout = async () => {
         await auth.signOut();
         localStorage.removeItem('user')
         history.push("/login");
-        dispatch(getEmail(null));
     };
+    
 
-    // Post User for first time while logging
-    const postUser = async(user) => {
-        const postedUser = await axios.post(`${commonUrl}/users`, { name: user.displayName, email: user.email })
-        console.log("postedUser", postedUser);
+    const getEmail = async(token) => {
+        const email = await axios.get(`${commonUrl}/users/getemail`, {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        });
+        localStorage.setItem("email", JSON.stringify(email.data.email));
     }
 
-    auth.onAuthStateChanged((user) => {
-        console.log("!localStorage.getItem: ", !localStorage.getItem("user"));
-        if (!localStorage.getItem('user') && user) {
-            postUser(user);
-
-            localStorage.setItem("user", JSON.stringify(user ? user.email : ''));
-            history.push("/");
+    if (location.search.includes('token=')) {
+        if (!localStorage.getItem("user")) {
+            const token = location.search.replace("?token=", "");
+            console.log('token23434:', token)
+            getEmail(token);
+            localStorage.setItem("user", JSON.stringify(token));
         }
-        dispatch(getEmail(user));
-    });
+    }
+
+
     return (
         <div>
             <Switch>
                 <Route exact path="/">
-                    Hello Logged in
-                    <button onClick={logout}>logout</button>
-                    <button onClick={() => history.push("/sign")}>
-                        Sign Page
-                    </button>
+                    <MasterIndex />
                 </Route>
                 <Route path="/login">
                     <Login />
@@ -58,14 +63,32 @@ export const Router = () => {
                 <PrivateRoutes path="/create/story">
                     <Editor />
                 </PrivateRoutes>
+                <PrivateRoutes path="/index">
+                    <Index />
+                </PrivateRoutes>
+                <PrivateRoutes path="/myblog">
+                    <Details />
+                </PrivateRoutes>
+                <PrivateRoutes path="/dashboard">
+                    <Settings />
+                </PrivateRoutes>
+                <PrivateRoutes path="/drafts">
+                    <Drafts />
+                </PrivateRoutes>
+                <PrivateRoutes path="/appearance">
+                    <Appearance />
+                </PrivateRoutes>
+                <PrivateRoutes path="/posts">
+                    <Posts />
+                </PrivateRoutes>
                 <PrivateRoutes path="/profile">
-                    <div style={{display: 'flex'}}>
+                    <div style={{ display: "flex" }}>
                         <Sidebar />
                         <Profile />
                     </div>
                 </PrivateRoutes>
                 <PrivateRoutes path="/settings">
-                    <div style={{display: 'flex'}}>
+                    <div style={{ display: "flex" }}>
                         <Sidebar />
                         <UserForm />
                     </div>

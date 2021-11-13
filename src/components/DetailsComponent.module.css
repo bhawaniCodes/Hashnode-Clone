@@ -1,0 +1,19 @@
+.mainCont{
+    display: flex;
+    flex-direction: row;
+    width:47rem;
+    height:14rem;
+    /* border: 1px solid red; */
+    padding: .5rem;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+}
+.img1{
+    border: 1px solid #212121;
+    border-radius: .2rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    
+}

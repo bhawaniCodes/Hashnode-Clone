@@ -1,13 +1,5 @@
-import { useState } from "react";
-import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-} from "@firebase/auth";
-import {
-    auth,
-    gitHubProvider,
-    googleProvider,
-} from "../config/firebase-config";
+import { useEffect, useState } from "react";
+
 
 import React from "react";
 import styled from "styled-components";
@@ -16,70 +8,56 @@ import { BsGithub, BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { FaLinkedin } from "react-icons/fa";
 import logo_name from "../images/logo_name.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import { getEmail } from "../Redux/authReducer/action";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { NewLogo } from "../images/NewLogo";
+import axios from "axios";
+const commonUrl = process.env.REACT_APP_COMMON_URL;
 
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const dispatch = useDispatch();
-    const user = useSelector((data) => data.user);
     const history = useHistory();
 
-    const handleLoginWithGoogle = async() => {
+
+    const handleLoginWithGoogle = async () => {
         try {
-            window.open("http://localhost:2266/auth/google/", "_self");
-            // await auth.signInWithRedirect(googleProvider);
+            await window.open(`${commonUrl}/auth/google/`, "_self");
         } catch (error) {
             console.log(error);
         }
     };
 
-    const handleSubmit = async () => {
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            const userData = await createUserWithEmailAndPassword(
-                auth,
+            const userData = await axios.post(`${commonUrl}/register`, {
                 email,
-                password
-            );
-            console.log("handleSubmit1");
-            dispatch(getEmail(userData));
+                password,
+            });
+            console.log("userData:", userData);
+            if (!localStorage.getItem("user") && userData) {
+                localStorage.setItem(
+                    "email",
+                    JSON.stringify(userData.data.user.email)
+                );
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(userData.data.token)
+                );
+                history.push("/index");
+            }
         } catch (error) {
-            if (error.message.includes("(auth/email-already-in-use).")) {
-                console.log("handleSubmit1error");
-                console.log(error.message);
-                login();
-            } else console.log("err: handleSubmit1AllError", error.message);
+            alert("Please check your email or password");
         }
     };
-
-    const login = async () => {
-        try {
-            const userData = await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-            console.log("login2");
-            // localStorage.setItem("user", JSON.stringify(userData));
-            dispatch(getEmail(userData));
-            // history.push("/");
-        } catch (error) {
-            console.log("login2");
-            alert(error.message);
-            console.log(error.message);
-        }
-    };
-
     const logout = async () => {
-        await auth.signOut(auth);
-        console.log("logout:", logout);
         localStorage.removeItem("user");
-        dispatch(getEmail(null));
+        localStorage.removeItem("email");
+        history.push("/");
     };
+
 
     return (
         <LoginMainDiv>
@@ -97,20 +75,27 @@ export const Login = () => {
                             Sign in using a secure link
                         </SignInSecureLinkH1>
                         <InputSubmitDiv>
-                            <Input
-                                autoFocus
-                                type="email"
-                                placeholder="Enter your email address"
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <Input
-                                type="password"
-                                placeholder="Enter your password"
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <SubmitButton onClick={handleSubmit}>
-                                Submit
-                            </SubmitButton>
+                            <form onSubmit={handleSubmit}>
+                                <Input
+                                    autoFocus
+                                    type="email"
+                                    placeholder="Enter your email address"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                                <Input
+                                    type="password"
+                                    placeholder="Enter your password"
+                                    minLength="6"
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                    required
+                                />
+                                <SubmitButton type="submit">
+                                    Submit
+                                </SubmitButton>
+                            </form>
                         </InputSubmitDiv>
                         <ConnectWithH1>Or, connect with</ConnectWithH1>
                         <AllDivsButton>

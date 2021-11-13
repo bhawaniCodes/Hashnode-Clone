@@ -6,6 +6,7 @@ const Container = styled.div`
     width: 85%;
     float: right;
     background: #f5f7fa;
+    margin-left: 2%;
 `;
 
 function Profile() {

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useHistory } from "react-router";
+
 
 
 const Container = styled.div`
@@ -40,13 +42,13 @@ const Information = styled.div`
 
 const Name = styled.div`
     width: 180px;
-    margin-left: 38%;
     width: 62%;
     
     & > h1 {
         font-size: 1.875rem;
-        margin-top: 0px;
+        margin-top: 15px;
         margin-bottom: 0px;
+        margin-left: 20rem;
     }
 
     & > p {
@@ -113,7 +115,8 @@ const EditButton = styled.div`
     width: 7rem;
     padding: 0.3rem 0.5rem 0.3rem 0.5rem;
     color: #374151;
-    margin-top: 50px; 
+    margin-top: 50px;
+    margin-left: 24rem;
 
     &:hover {
         background-color: #e5e7eb;
@@ -127,42 +130,67 @@ const EditButton = styled.div`
 `;
 
 function TopSection() {
-    const myId = false;
-    const anotherId = "618cde6fe1cacf3b94d730ca  6183abda180f196b316a3e52";
+    const history = useHistory();
+    let email = JSON.parse(localStorage.getItem("email"));
+    let arr = email.split("." || "@");
+    let name = arr[0];
+
+
     
     return (
         <Container>
-            <CoverImage>
-            </CoverImage>
+            <CoverImage></CoverImage>
             <ProfileImage>
-                <img src="https://user-images.githubusercontent.com/35700009/139771831-044f1bee-935e-4413-bd62-65481c0d211d.jpg" alt="profile"/>
+                <img
+                    src="https://cdn.hashnode.com/res/hashnode/image/upload/v1629282644342/VGWU-WK52.png?w=200&h=200&fit=crop&crop=faces&auto=compress&auto=compress"
+                    alt="profile"
+                />
             </ProfileImage>
             <Information>
                 <Name>
-                    <h1>Mohit Maurya</h1>
-                    {
-                        myId === true ?
-                              <EditButton>
-                                <svg viewBox="0 0 512 512"><path d="M493.255 56.236l-37.49-37.49c-24.993-24.993-65.515-24.994-90.51 0L12.838 371.162.151 485.346c-1.698 15.286 11.22 28.203 26.504 26.504l114.184-12.687 352.417-352.417c24.992-24.994 24.992-65.517-.001-90.51zm-95.196 140.45L174 420.745V386h-48v-48H91.255l224.059-224.059 82.745 82.745zM126.147 468.598l-58.995 6.555-30.305-30.305 6.555-58.995L63.255 366H98v48h48v34.745l-19.853 19.853zm344.48-344.48l-49.941 49.941-82.745-82.745 49.941-49.941c12.505-12.505 32.748-12.507 45.255 0l37.49 37.49c12.506 12.506 12.507 32.747 0 45.255z"></path></svg>
-                                Edit Profile
-                            </EditButton> :
-                            <>
-                                <p>What if, books could talk? Check out Primerlabs.io</p>
-                                <Button>
-                                    <span class="material-icons" style={{fontSize:"1.5rem",maginLeft:"0px"}}>control_point</span>
-                                    <span>Follow</span>
-                                </Button>
-                            </>
-                    }
+                    <h1>{name}</h1>
+                    {true === true ? (
+                        <EditButton
+                            onClick={() => {
+                                history.push("/settings");
+                            }}
+                        >
+                            <svg viewBox="0 0 512 512">
+                                <path d="M493.255 56.236l-37.49-37.49c-24.993-24.993-65.515-24.994-90.51 0L12.838 371.162.151 485.346c-1.698 15.286 11.22 28.203 26.504 26.504l114.184-12.687 352.417-352.417c24.992-24.994 24.992-65.517-.001-90.51zm-95.196 140.45L174 420.745V386h-48v-48H91.255l224.059-224.059 82.745 82.745zM126.147 468.598l-58.995 6.555-30.305-30.305 6.555-58.995L63.255 366H98v48h48v34.745l-19.853 19.853zm344.48-344.48l-49.941 49.941-82.745-82.745 49.941-49.941c12.505-12.505 32.748-12.507 45.255 0l37.49 37.49c12.506 12.506 12.507 32.747 0 45.255z"></path>
+                            </svg>
+                            Edit Profile
+                        </EditButton>
+                    ) : (
+                        <>
+                            <p>
+                                What if, books could talk? Check out
+                                Primerlabs.io
+                            </p>
+                            <Button onClick={() => history.push("/settings")}>
+                                <span
+                                    class="material-icons"
+                                    style={{
+                                        fontSize: "1.5rem",
+                                        maginLeft: "0px",
+                                    }}
+                                >
+                                    control_point
+                                </span>
+                                <span>Follow</span>
+                            </Button>
+                        </>
+                    )}
                 </Name>
                 <Slider>
-                    <span style={{borderBottom: "2px solid #2962ff"}}>PROFILE</span>
+                    <span style={{ borderBottom: "2px solid #2962ff" }}>
+                        PROFILE
+                    </span>
                     <span>FOLLOWERS</span>
                     <span>FOLLOWING</span>
                 </Slider>
             </Information>
         </Container>
-    )
+    );
 }
 
 export { TopSection };

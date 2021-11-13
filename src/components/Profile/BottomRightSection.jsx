@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Container = styled.div`
     border-radius: 0.5rem;
@@ -89,6 +91,7 @@ const MiddleCard = styled.div`
 
 const TextArea = styled.div`
     width:  ${(props) => props.width};
+    text-align: left;
     & > p {
         font-size: 1.125rem;
         color: #616161;
@@ -136,31 +139,49 @@ const LikeAndComment = styled.div`
     }
 `;
 
-const data = [
-    {
-        title: "What You Need To Know About Scope in JavaScript - No Buzzwords",
-        body: "We declare variables in every JavaScript file and we want to use those variables in our codebase. When we declare a variable in a function, it's scope is only limited to the function.",
-        link: "mohit.hasnode.com",
-        like: 3,
-        comments: 4,
-        date: "Nov 3, 2021",
-        image: "https://user-images.githubusercontent.com/35700009/139771831-044f1bee-935e-4413-bd62-65481c0d211d.jpg",
-        name: "Mohit Maurya",
-        cover_image: "https://ajibolasegun.hashnode.dev/_next/image?url=https%3A%2F%2Fcdn.hashnode.com%2Fres%2Fhashnode%2Fimage%2Fupload%2Fv1635878703044%2FvnYXbQdLPf.jpeg%3Fw%3D1600%26h%3D840%26fit%3Dcrop%26crop%3Dentropy%26auto%3Dcompress%2Cformat%26format%3Dwebp&w=1920&q=75"
-    },
-    {
-        title: "What You Need To Know About Scope in JavaScript - No Buzzwords",
-        body: "We declare variables in every JavaScript file and we want to use those variables in our codebase. When we declare a variable in a function, it's scope is only limited to the function.",
-        link: "mohit.hasnode.com",
-        like: 3,
-        comments: 4,
-        date: "Nov 3, 2021",
-        image: "https://user-images.githubusercontent.com/35700009/139771831-044f1bee-935e-4413-bd62-65481c0d211d.jpg",
-        name: "Mohit Maurya"
-    }
-];
-
 function BottomRightSection() {
+    const [userData, setUserData] = useState({
+        name: "",
+        avatar: "",
+        coverImage: "",
+        email: "",
+        password: "",
+        tagline: "",
+        location: "",
+        about: "",
+        blogIds: [],
+        skill: [],
+        social: {
+            facebook: "",
+            twitter: "",
+            linkdin: "",
+            websiteUrl: "",
+            github: "",
+        },
+    });
+
+    const [data, setData] = useState([]);
+    const token = JSON.parse(localStorage.getItem("user"));
+    const getData = async () => {
+        const res = await axios.get(`http://locahost:2266/users`, {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
+        setUserData(res.data);
+        res.data.blogIds.map(async (e) => {
+            const res = await axios.get(`http://locahost:2266/users${e}`, {
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            });
+            data.push(res.data);
+        })
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
     return (
         <Container>
             {
@@ -185,7 +206,7 @@ function BottomRightSection() {
                                     <MiddleCard>
                                         <TextArea width={el.cover_image ? "60%" : "100%"}>
                                             <p>{el.title}</p>
-                                            <p>{el.body}</p>
+                                            <p>{el.body.subString(0,100)}</p>
                                         </TextArea>
                                         <ImageArea width={el.cover_image ? "40%" : "0%"}>
                                             <img src={el.cover_image} alt=""/>

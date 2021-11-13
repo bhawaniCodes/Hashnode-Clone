@@ -12,6 +12,8 @@ export const SettingDiv = ({
     readTime,
     publishBlog,
 }) => {
+    console.log('paragraphCount:', paragraphCount);
+    
     return (
         <>
             <SettingMainDiv>
@@ -134,22 +136,22 @@ const SeoTitleTextAreaDiv = styled.div`
         box-sizing: border-box;
     }
 `;
-const SelectTagInput = styled.div`
-    & > :nth-child(1) {
-        margin-bottom: 0.5rem;
+// const SelectTagInput = styled.div`
+//     & > :nth-child(1) {
+//         margin-bottom: 0.5rem;
 
-        & input {
-            width: 100%;
-            padding: 0;
-            margin: 0;
-            font-size: 100%;
-            color: rgb(31, 41, 55);
-            background-color: transparent;
-            outline: none;
-            border: none;
-        }
-    }
-`;
+//         & input {
+//             width: 100%;
+//             padding: 0;
+//             margin: 0;
+//             font-size: 100%;
+//             color: rgb(31, 41, 55);
+//             background-color: transparent;
+//             outline: none;
+//             border: none;
+//         }
+//     }
+// `;
 const CloseButtonToPublish = styled.div`
     position: relative;
     & > :nth-child(1) {

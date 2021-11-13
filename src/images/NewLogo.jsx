@@ -4,7 +4,7 @@ export const NewLogo = ({ width, height}) => {
     return (
         <>
             <svg
-                style={{ width: width, height: height }}
+                style={{ width: width, height: height, cursor: 'pointer' }}
                 viewBox="0 0 688 118"
                 fill="black"
                 width

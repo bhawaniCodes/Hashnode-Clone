@@ -15,52 +15,117 @@ const Container = styled.div`
 
 function FormContainer() {
     const [savedSkill, setSavedSkill] = useState([]);
-    const id = "6183abda180f196b316a3e52";
-    const [social, setSocial] = useState({});
-    
+    const [social, setSocial] = useState({
+        facebook: "",
+        twitter: "",
+        linkdin: "",
+        websiteUrl: "",
+        github: "",
+    });
+    const [coverImage, setCoverImage] = useState("");
+    const [profileImage, setProfileImage] = useState(
+        "https://via.placeholder.com/50"
+    );
+    console.log("coverImage:", coverImage);
+    console.log("profileImage:", profileImage);
+
+    const token = JSON.parse(localStorage.getItem("user"));
+
     const addSocialData = (e) => {
         const { value, name } = e.target;
         setSocial({
             ...social,
-            [name]: value
-        })
+            [name]: value,
+        });
         setUserData({
             ...userData,
-            social:social
-        })
-    }
-    
-    const [userData, setUserData] = useState({});
+            social: social,
+        });
+    };
+    console.log(token);
+
+
+    const [userData, setUserData] = useState({
+        name: "",
+        avatar: profileImage,
+        coverImage: coverImage,
+        email: "",
+        password: "",
+        tagline: "",
+        location: "",
+        about: "",
+        blogIds: [],
+        skill: [],
+        social: {
+            facebook: "",
+            twitter: "",
+            linkdin: "",
+            websiteUrl: "",
+            github: "",
+        },
+    });
+
+
 
     const getUser = async () => {
-        const res = await axios.get(`http://localhost:4455/users/${id}`);
+        const res = await axios.get(`http://localhost:2266/users`, {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        });
         setUserData(res.data);
-        setSocial(res.data.social);
+        setSocial(
+            res.data.social
+                ? res.data.social
+                : {
+                      facebook: "",
+                      twitter: "",
+                      linkdin: "",
+                      websiteUrl: "",
+                      github: "",
+                  }
+        );
         setSavedSkill(res.data.skill);
-    }
+    };
 
     useEffect(() => {
         getUser();
-    }, [])
+    }, []);
 
     const addUserData = (e) => {
         const { value, name } = e.target;
         setUserData({
             ...userData,
-            [name]:value
-        })
-    }
+            [name]: value,
+        });
+    };
 
     const updateUser = async () => {
         userData.skill = savedSkill;
-        await axios.patch(`http://localhost:4455/users/${id}`, userData);
+        userData.avatar = profileImage;
+        userData.coverImage = coverImage
+        await axios.patch(`http://localhost:2266/users`, userData, {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        });
         getUser();
-    }
+    };
 
     return (
         <Container>
-            <LeftFormSection addUserData={addUserData} updateUser={updateUser} savedSkill={savedSkill} setSavedSkill={setSavedSkill} userData={userData}/>
-            <RightFormSection addSocialData={addSocialData} social={social}/>
+            <LeftFormSection
+                addUserData={addUserData}
+                updateUser={updateUser}
+                savedSkill={savedSkill}
+                setSavedSkill={setSavedSkill}
+                userData={userData}
+                coverImage={coverImage}
+                setCoverImage={setCoverImage}
+                profileImage={profileImage}
+                setProfileImage={setProfileImage}
+            />
+            <RightFormSection addSocialData={addSocialData} social={social} />
         </Container>
     );
 }

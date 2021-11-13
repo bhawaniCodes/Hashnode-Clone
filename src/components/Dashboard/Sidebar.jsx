@@ -1,16 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router";
-import axios from "axios";
-import { auth } from "../config/firebase-config";
-
 const FlexBox = styled.div`
-  position: relative;
+  position: fixed;
   display: flex;
+  z-index: -10;
   width: 11.6rem;
   height: 95vh;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
 `;
 
 const Button = styled.button`
@@ -91,14 +90,13 @@ const UserButton = styled.button`
   background: none;
   border: none;
   z-index: 0;
-  // padding: 0 10px 0 0px;
+  padding: 0 10px 0 10px;
   cursor: pointer;
   &:hover {
     background-color: #fff;
   }
 `;
 const Image = styled.img`
-  // position: relative
   width: 40px;
   margin-top: 20px;
   margin-bottom: 4vh;
@@ -107,98 +105,12 @@ const Image = styled.img`
     background-color: #fff;
   }
 `;
-const UserDiv = styled.div`
-  position: fixed;
-  bottom: 40px;
-  left: 160px;
-  width: 200px;
-  padding-right: 15px;
-  height: auto;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 10px;
-  z-index: 100;
-  background-color:#fff;
-`;
-const UserButtonData = styled.button`
-display: flex;
-column-gap: 5px;
-padding-left: 10px;
-width:100%;
-height:40px;
-background: none;
-outline: none;
-border: none;
-color: none;
-font-weight: 500;
-cursor: pointer;
-`;
-const UserButtonDataLog = styled.button`
-display: flex;
-column-gap: 5px;
-padding-left: 10px;
-padding-top:8px;
-width:100%;
-height:40px;
-background: none;
-outline: none;
-border: none;
-color: none;
-font-weight: 500;
-cursor: pointer;
-`;
-const DivButton = styled.div`
-  padding: 3px;
-`;
-const UserDetails = styled.div`
-display: flex;
-column-gap: 10px;
-width:100%;
-height: auto;
-padding: 10px;
-`
-const ImageClick = styled.img`
-  width: 50px;
-  cursor: pointer;
-  &:hover {
-    background-color: #fff;
-  }
-`;
-
-const commonUrl = process.env.REACT_APP_COMMON_URL;
 function Sidebar() {
-
   const [hidden, setHidden] = React.useState(true);
-  const [userData, setUserData] = React.useState(false);
-  const [userAuth, setUserAuth] = React.useState(false);
-//   const [user, setUser] = React.useState("user");
-  const history = useHistory();
 
   const handleHidden = () => {
     hidden ? setHidden(false) : setHidden(true);
   };
-  const handleUser = () => {
-    userData ? setUserData(false) : setUserData(true);
-  };
-
-  const handleLogOut = async() => {
-    await auth.signOut();
-    localStorage.removeItem('user')
-    history.push("/");
-  }
-  const handleLogin = async() => {
-    history.push("/index");
-  }
-  const handleBlog = () => {
-    history.push("/myblog");
-  }
-  const handleDash = async() => {
-    history.push("/dashboard");
-  }
-  let user = JSON.parse(localStorage.getItem("user"));
-  let email = JSON.parse(localStorage.getItem("email"));
-  let arr = (email.split("." || "@"))
-    let name = arr[0]
-//   console.log("user:", user);
   return (
     <>
       <FlexBox>
@@ -220,7 +132,7 @@ function Sidebar() {
             </HeadSvg>
           </div>
 
-          <Button onClick={() => history.push("/create/story")}>
+          <Button>
             <div>
               <Svg>
                 <svg viewBox="0 0 512 512">
@@ -366,7 +278,7 @@ function Sidebar() {
         <div>
           <div>
             <UserButton>
-              <svg viewBox="0 0 100 100" fill="gray" width="23px">
+              <svg viewBox="0 0 100 100" fill="gray">
                 <path
                   d="M50 23.61c-14.55 0-26.388 11.839-26.388 26.388 0 14.55 11.839 26.388 26.388 26.388 14.55 0 26.388-11.838 26.388-26.388 0-14.55-11.839-26.388-26.388-26.388zm0 45.369c-10.466 0-18.98-8.515-18.98-18.98 0-10.463 8.514-18.982 18.98-18.982 10.466 0 18.98 8.519 18.98 18.981 0 10.466-8.514 18.98-18.98 18.98zM50 18.209a3.705 3.705 0 003.704-3.704V3.704a3.704 3.704 0 00-7.407 0v10.801A3.703 3.703 0 0050 18.209zM50 81.786a3.704 3.704 0 00-3.704 3.703v10.804a3.704 3.704 0 007.408 0V85.489A3.706 3.706 0 0050 81.786zM96.296 46.295H85.495a3.704 3.704 0 000 7.407h10.801a3.704 3.704 0 000-7.407zM18.21 49.998a3.702 3.702 0 00-3.703-3.703H3.704a3.704 3.704 0 000 7.407h10.803a3.704 3.704 0 003.703-3.704zM77.716 27.52l7.636-7.64a3.704 3.704 0 000-5.236 3.701 3.701 0 00-5.236 0l-7.637 7.637a3.703 3.703 0 105.237 5.238zM22.282 72.477l-7.638 7.639a3.703 3.703 0 105.237 5.236l7.638-7.635a3.709 3.709 0 000-5.24 3.703 3.703 0 00-5.236 0zM77.718 72.48a3.705 3.705 0 00-5.24 0 3.706 3.706 0 000 5.237l7.64 7.635a3.703 3.703 0 105.236-5.236l-7.636-7.635zM22.282 27.52a3.704 3.704 0 005.237-5.24l-7.638-7.638a3.705 3.705 0 00-5.237 0 3.706 3.706 0 000 5.237l7.638 7.64z"
                   fill="fill-current"
@@ -376,62 +288,18 @@ function Sidebar() {
           </div>
           <div>
             <UserButton>
-              <svg viewBox="0 0 448 512" fill="gray" width="20px">
+              <svg viewBox="0 0 448 512" fill="gray">
                 <path d="M224 480c-17.66 0-32-14.38-32-32.03h-32c0 35.31 28.72 64.03 64 64.03s64-28.72 64-64.03h-32c0 17.65-14.34 32.03-32 32.03zm209.38-145.19c-27.96-26.62-49.34-54.48-49.34-148.91 0-79.59-63.39-144.5-144.04-152.35V16c0-8.84-7.16-16-16-16s-16 7.16-16 16v17.56C127.35 41.41 63.96 106.31 63.96 185.9c0 94.42-21.39 122.29-49.35 148.91-13.97 13.3-18.38 33.41-11.25 51.23C10.64 404.24 28.16 416 48 416h352c19.84 0 37.36-11.77 44.64-29.97 7.13-17.82 2.71-37.92-11.26-51.22zM400 384H48c-14.23 0-21.34-16.47-11.32-26.01 34.86-33.19 59.28-70.34 59.28-172.08C95.96 118.53 153.23 64 224 64c70.76 0 128.04 54.52 128.04 121.9 0 101.35 24.21 138.7 59.28 172.08C421.38 367.57 414.17 384 400 384z"></path>
               </svg>
             </UserButton>
           </div>
           <div>
-            <UserButton onClick={handleUser}>
-              <Image
-                src="https://cdn.hashnode.com/res/hashnode/image/upload/v1629282644342/VGWU-WK52.png?w=200&h=200&fit=crop&crop=faces&auto=compress&auto=compress"
-                alt="userImage"
-              />
-            </UserButton>
+            <Image
+              src="https://cdn.hashnode.com/res/hashnode/image/upload/v1629282644342/VGWU-WK52.png?w=200&h=200&fit=crop&crop=faces&auto=compress&auto=compress"
+              alt="userImage"
+            />
           </div>
         </div>
-        {userData && (
-          <UserDiv>
-              {user && <>
-              <UserDetails>
-              <ImageClick
-                src="https://cdn.hashnode.com/res/hashnode/image/upload/v1629282644342/VGWU-WK52.png?w=200&h=200&fit=crop&crop=faces&auto=compress&auto=compress"
-                alt="userImage"
-              />
-              <div>
-                  <h3>{name}</h3>
-              </div>
-              </UserDetails>
-            <UserButtonData onClick={handleBlog}>
-              <div>
-                <svg fill="gray" viewBox="0 0 24 24" width="24">
-                  <path d="M17.9 17.39c-.26-.8-1.01-1.39-1.9-1.39h-1v-3a1 1 0 0 0-1-1H8v-2h2a1 1 0 0 0 1-1V7h2a2 2 0 0 0 2-2v-.41c2.93 1.18 5 4.05 5 7.41 0 2.08-.8 3.97-2.1 5.39M11 19.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.22.21-1.79L9 15v1a2 2 0 0 0 2 2m1-16A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2z"></path>
-                </svg>
-              </div>
-              <DivButton>Blog Home</DivButton>
-            </UserButtonData>
-            
-            <UserButtonData onClick={handleDash}>
-              <div>
-                <svg fill="gray" viewBox="0 0 512 512" width="24"><path d="M482.696 299.276l-32.61-18.827a195.168 195.168 0 000-48.899l32.61-18.827c9.576-5.528 14.195-16.902 11.046-27.501-11.214-37.749-31.175-71.728-57.535-99.595-7.634-8.07-19.817-9.836-29.437-4.282l-32.562 18.798a194.125 194.125 0 00-42.339-24.48V38.049c0-11.13-7.652-20.804-18.484-23.367-37.644-8.909-77.118-8.91-114.77 0-10.831 2.563-18.484 12.236-18.484 23.367v37.614a194.101 194.101 0 00-42.339 24.48L105.23 81.345c-9.621-5.554-21.804-3.788-29.437 4.282-26.36 27.867-46.321 61.847-57.535 99.595-3.149 10.599 1.47 21.972 11.046 27.501l32.61 18.827a195.168 195.168 0 000 48.899l-32.61 18.827c-9.576 5.528-14.195 16.902-11.046 27.501 11.214 37.748 31.175 71.728 57.535 99.595 7.634 8.07 19.817 9.836 29.437 4.283l32.562-18.798a194.08 194.08 0 0042.339 24.479v37.614c0 11.13 7.652 20.804 18.484 23.367 37.645 8.909 77.118 8.91 114.77 0 10.831-2.563 18.484-12.236 18.484-23.367v-37.614a194.138 194.138 0 0042.339-24.479l32.562 18.798c9.62 5.554 21.803 3.788 29.437-4.283 26.36-27.867 46.321-61.847 57.535-99.595 3.149-10.599-1.47-21.972-11.046-27.501zm-65.479 100.461l-46.309-26.74c-26.988 23.071-36.559 28.876-71.039 41.059v53.479a217.145 217.145 0 01-87.738 0v-53.479c-33.621-11.879-43.355-17.395-71.039-41.059l-46.309 26.74c-19.71-22.09-34.689-47.989-43.929-75.958l46.329-26.74c-6.535-35.417-6.538-46.644 0-82.079l-46.329-26.74c9.24-27.969 24.22-53.869 43.929-75.969l46.309 26.76c27.377-23.434 37.063-29.065 71.039-41.069V44.464a216.79 216.79 0 0187.738 0v53.479c33.978 12.005 43.665 17.637 71.039 41.069l46.309-26.76c19.709 22.099 34.689 47.999 43.929 75.969l-46.329 26.74c6.536 35.426 6.538 46.644 0 82.079l46.329 26.74c-9.24 27.968-24.219 53.868-43.929 75.957zM256 160c-52.935 0-96 43.065-96 96s43.065 96 96 96 96-43.065 96-96-43.065-96-96-96zm0 160c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z"></path></svg>
-              </div>
-              <DivButton>Blog Dashboard</DivButton>
-            </UserButtonData>
-            </>
-        }
-            {user ? <UserButtonData onClick={handleLogOut}>
-              <div>
-                <svg fill="gray" viewBox="0 0 512 512" width="24"><path d="M48 64h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48zm279 19.5l-7.1 7.1c-4.7 4.7-4.7 12.3 0 17l132 131.4H172c-6.6 0-12 5.4-12 12v10c0 6.6 5.4 12 12 12h279.9L320 404.4c-4.7 4.7-4.7 12.3 0 17l7.1 7.1c4.7 4.7 12.3 4.7 17 0l164.5-164c4.7-4.7 4.7-12.3 0-17L344 83.5c-4.7-4.7-12.3-4.7-17 0z"></path></svg>
-              </div>
-              <DivButton>Log out</DivButton>
-            </UserButtonData> : <UserButtonDataLog onClick={handleLogin}>
-              <div>
-                <svg fill="gray" viewBox="0 0 512 512" width="24"><path d="M48 64h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48zm279 19.5l-7.1 7.1c-4.7 4.7-4.7 12.3 0 17l132 131.4H172c-6.6 0-12 5.4-12 12v10c0 6.6 5.4 12 12 12h279.9L320 404.4c-4.7 4.7-4.7 12.3 0 17l7.1 7.1c4.7 4.7 12.3 4.7 17 0l164.5-164c4.7-4.7 4.7-12.3 0-17L344 83.5c-4.7-4.7-12.3-4.7-17 0z"></path></svg>
-              </div>
-              <DivButton>Log in</DivButton>
-            </UserButtonDataLog>}
-          </UserDiv>
-        )}
       </FlexBox>
     </>
   );

@@ -82,14 +82,37 @@ const FollowDiv = styled.div`
 `;
 
 function BottomLeftSection() {
-    const [userData, setUserData] = useState({});
-    const id = "6183abda180f196b316a3e52";
+    const [userData, setUserData] = useState({
+        name: "",
+        avatar: "",
+        coverImage: "",
+        email: "",
+        password: "",
+        tagline: "",
+        location: "",
+        about: "",
+        blogIds: [],
+        skill: [],
+        social: {
+            facebook: "",
+            twitter: "",
+            linkdin: "",
+            websiteUrl: "",
+            github: "",
+        },
+    });
+
+    const token = JSON.parse(localStorage.getItem("user"));
 
     const getData = async () => {
-        const res = await axios.get(`http://locahost:4455/users/${id}`);
+        const res = await axios.get(`http://locahost:2266/users`, {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
         setUserData(res.data);
     }
-
+ 
     useEffect(() => {
         getData();
     }, []);
@@ -99,15 +122,15 @@ function BottomLeftSection() {
             <MyHashNodeBlog>
                 <div>
                     <p>Location:</p>
-                    <p>Bareilly, India</p>
+                    <p>{userData.location}</p>
                 </div>
-                <div>
+                {/* <div>
                     <p>Joined:</p>
                     <p>Bareilly, India</p>
-                </div>
+                </div> */}
                 <div>
                     <p>Email:</p>
-                    <p>Bareilly, India</p>
+                    <p>{userData.email}</p>
                 </div>
             </MyHashNodeBlog>
             <FollowDiv>
