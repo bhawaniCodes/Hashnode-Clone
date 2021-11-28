@@ -38,6 +38,11 @@ export const Login = () => {
             });
             console.log("userData:", userData);
             if (!localStorage.getItem("user") && userData) {
+                const now = new Date();
+                localStorage.setItem(
+                    "expiry",
+                    JSON.stringify(now.getTime() + 60000000)
+                );
                 localStorage.setItem(
                     "email",
                     JSON.stringify(userData.data.user.email)
@@ -46,17 +51,13 @@ export const Login = () => {
                     "user",
                     JSON.stringify(userData.data.token)
                 );
-                history.push("/index");
+                history.push("/");
             }
         } catch (error) {
             alert("Please check your email or password");
         }
     };
-    const logout = async () => {
-        localStorage.removeItem("user");
-        localStorage.removeItem("email");
-        history.push("/");
-    };
+
 
 
     return (
@@ -118,7 +119,6 @@ export const Login = () => {
                                 <span>Facebook</span>
                             </AllA>
                             <AllA
-                                onClick={logout}
                                 style={{ background: "rgb(0,119,181)" }}
                             >
                                 <FaLinkedin fontSize="1.5rem" />

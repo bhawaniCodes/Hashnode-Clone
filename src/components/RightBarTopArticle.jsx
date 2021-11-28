@@ -155,7 +155,6 @@ function RightBarTopArticle() {
                 </div>
                 <div>
                     <ButtonRightActive
-                        onClick={() => history.push("/dashboard")}
                     >
                         1w
                     </ButtonRightActive>

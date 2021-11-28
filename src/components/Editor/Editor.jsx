@@ -36,10 +36,12 @@ export const Editor = () => {
     const [subTitleData, setSubTitleData] = useState(""); 
     const [liveSaving, setLiveSaving] = useState(false);
     const [wordCount, setWordCount] = useState(0); 
+    console.log('wordCount:', wordCount)
     const [readTime, setReadTime] = useState(1); 
     const [paragraphCount, setParagraphCount] = useState(0); 
     const [coverImage, setCoverImage] = useState("");
     const [fileNameAtWrite, setFileNameAtWrite] = useState("");
+    const [showTags, setShowTags] = useState(false);
     const history = useHistory();
 
     const commonUrl = process.env.REACT_APP_COMMON_URL;
@@ -237,6 +239,12 @@ export const Editor = () => {
         let currentStoredDataString = e.target.value;
         setStoreData(currentStoredDataString);
 
+         if (currentStoredDataString.length === 0) {
+             setShowTags(false);
+         } else {
+             setShowTags(true);
+         }
+
         // Call function for store live data
         handleLiveData(e, "body");
 
@@ -247,68 +255,27 @@ export const Editor = () => {
         str = str.replace(/[ ]{2,}/gi, " ");
         let cur = str.split(" ").length;
         setWordCount(cur);
+       
         // Put count Locally
         handleLiveDataCounts("wordCount", cur);
-        if (currentStoredDataString.length > 0 && paragraphCount === 0) {
-            handleLiveDataCounts("paragraphCount", 1);
-            setParagraphCount(1);
-        } else if (
-            currentStoredDataString.length === 0 &&
-            paragraphCount === 1
-        ) {
-            handleLiveDataCounts("paragraphCount", 0);
-            setParagraphCount(0);
-        }
 
         // For Read time
         let readingTime = Math.ceil(cur / 150);
         setReadTime(readingTime);
+
         // Put read time Locally
         handleLiveDataCounts("readTime", readingTime);
-        setLiveSaving(false);
+        
 
-        // For paragraph count
-        if (currentStoredDataString.length > storeData.length) {
-            if (currentStoredDataString.length === 1) {
-                setParagraphCount(1);
-                handleLiveDataCounts("paragraphCount", 1);
-            }
-            if (
-                currentStoredDataString[currentStoredDataString.length - 1] !==
-                " "
-            ) {
-                if (
-                    currentStoredDataString[
-                        currentStoredDataString.length - 1
-                    ] !== "\n" &&
-                    stack[stack.length - 1] === "\n" &&
-                    stack[stack.length - 2] === "\n"
-                ) {
-                    setParagraphCount(paragraphCount + 1);
-                    handleLiveDataCounts("paragraphCount", paragraphCount + 1);
-                }
-
-                stack.push(
-                    currentStoredDataString[currentStoredDataString.length - 1]
-                );
-            }
-        } else {
-            if (storeData.length === 1) {
-                setParagraphCount(0);
-                handleLiveDataCounts("paragraphCount", 0);
-            }
-            if (storeData[storeData.length - 1] !== " ") {
-                if (
-                    storeData[storeData.length - 1] !== "\n" &&
-                    stack[stack.length - 2] === "\n" &&
-                    stack[stack.length - 3] === "\n"
-                ) {
-                    setParagraphCount(paragraphCount - 1);
-                    handleLiveDataCounts("paragraphCount", paragraphCount - 1);
-                }
-                stack.pop();
-            }
-        }
+        // For paragraph count 1
+        let paraCount = currentStoredDataString
+            .replace(/\n$/gm, "")
+            .split(/\n/).length;
+        setParagraphCount(paraCount)
+        handleLiveDataCounts("paragraphCount", paraCount);
+         setTimeout(() => {
+             setLiveSaving(false);
+         }, 1000);
     };
 
     //Function to update paragraph count while click on Right side options
@@ -361,6 +328,7 @@ export const Editor = () => {
                 wordCount={wordCount}
                 paragraphCount={paragraphCount}
                 readTime={readTime}
+                showTags={showTags}
             />
             <BodyDiv>
                 <div>
@@ -376,7 +344,10 @@ export const Editor = () => {
                                 setCoverImage={setCoverImage}
                             />
                             <EditorOptionBar
-                                handleOptions={handleOptions}uploadImage={uploadImage} storeData={storeData} handleChangeData={handleChangeData}
+                                handleOptions={handleOptions}
+                                uploadImage={uploadImage}
+                                storeData={storeData}
+                                handleChangeData={handleChangeData}
                             />
                         </div>
                     </div>

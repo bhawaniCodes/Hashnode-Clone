@@ -1,149 +1,22 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import CenterCard from './CenterCard';
-import { useHistory } from "react-router";
+import CenterCard from "./CenterCard";
+import { useHistory, useLocation } from "react-router";
+import axios from "axios";
 
 
-const Div = styled.div`
-width:100%;
-overflow: hidden;
-`
-
-const MasterDiv = styled.div`
-width: 100%;
-border-radius: 10px;
-border: 0.5px solid #E5E7EB;
-margin-bottom: 2vh;
-background-color: #fff;
-`
-const MasterFlexDiv = styled.div`
-display: flex;
-justify-content: space-between;
-`
-const FlexDiv = styled.div`
-display: flex;
-column-gap: 5px;
-`
-const ShareDiv = styled.div`
-font-size: 16px;
-font-weight: 600;
-margin: 3px 0 0 8px;
-`
-const TopDiv = styled.div`
-height: 170px;
-padding: 0 15px 0 15px;
-`
-const AdjustDiv = styled.div`
-padding-top: 25px;
-height: 25px;
-`
-const TopDivOne = styled.div`
-position: relative;
-height: 300px;
-padding-top: 50px;
-`
-const TopDivTwo = styled.div`
-height: 30px;
-text-align: left;
-padding:20px;
-font-size: 20px;
-font-weight: 600;
-`
-const TopDivThree = styled.div`
-height: auto;
-padding: 10px 10px 10px 10px;
-`
-const Button = styled.button`
-  width: 13rem;
-  height: 47px;
-  font-weight: 600;
-  background-color: #1DA1F2;
-  color: #fff;
-  fill: #fff;
-  border: none;
-  border-radius: 10px;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  cursor: pointer;
-  &:hover{
-    background-color: rgb(41,98,255,0.8);
-}
-`;
-
-const BigButton = styled.button`
-  width: 99.98%;
-  height: 70px;
-  font-weight: 600;
-  background-color: #F5F7FA;
-//   color: #fff;
-//   fill: #fff;
-  border: none;
-  border-radius: 10px;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  cursor: pointer;
-  &:hover{
-    background-color: rgb(rgb(245,247,250,0.5));
-    border: 1px solid #e5e7eb;
-}
-`;
-const TransperentButton = styled.button`
-position: absolute;
-right: 0px;
-top: 10px;
-  width: 50px;
-  height: 42px;
-  background: none;
-  color: #000000;
-  fill: black;
-  border: none;
-  border-radius: 10px;
-  padding-right: 1rem;
-  cursor: pointer;
-  &:hover{
-      background-color: #fff;
-  }
-`;
-const InnerFlexBox = styled.div`
-  width: 100%;
-  height: auto;
-  text-align: left;
-  padding-bottom: 10px;
-  border-bottom: 0.5px solid #e5e7eb;
-color: #409E5C;
-font-weight: 600;
-`;
-const Image = styled.img`
-width:40px;
-margin-top: 20px;
-margin-bottom: 4vh;
-cursor: pointer;
-&:hover{
-    background-color: #fff;
-}
-`
-const H3 = styled.div`
-font-weight: 700;
-margin-top: 25px;
-`
-const CircleDiv = styled.div`
-width: 40px;
-height: 32px;
-border: 1px solid #e5e7eb;
-border-radius: 50%;
-background-color: #fff;
-padding-top: 8px;
-`
-const NormalDiv = styled.div`
-width: 150px;
-height: 32px;
-padding-top: 12px;
-font-size: 18px;
-`
 function AfterLoginCenter() {
+    // let user = JSON.parse(localStorage.getItem("user"));
     let email = JSON.parse(localStorage.getItem("email"));
-    let arr = (email.split("." || "@"))
-    let name = arr[0]
+    let name;
+    if (email) {
+        let arr = email.split("." || "@");
+        name = arr[0];
+    }
+    // useEffect(() => {
+    //     email = JSON.parse(localStorage.getItem("email"));
+    // }, [user, email])
+
     const history = useHistory();
 
     return (
@@ -203,7 +76,7 @@ function AfterLoginCenter() {
                         />
                     </div>
                     <div>
-                        Welcome, <b>{name}.</b>
+                        Welcome, <b>{name ? name : null}.</b>
                     </div>
                     <div>We hope you brought pizza. 🍕</div>
                     <p>Tell the world about us.</p>
@@ -230,4 +103,143 @@ function AfterLoginCenter() {
     );
 }
 
-export default AfterLoginCenter
+export default AfterLoginCenter;
+
+
+
+const Div = styled.div`
+    width: 100%;
+    overflow: hidden;
+`;
+
+const MasterDiv = styled.div`
+    width: 100%;
+    border-radius: 10px;
+    border: 0.5px solid #e5e7eb;
+    margin-bottom: 2vh;
+    background-color: #fff;
+`;
+const MasterFlexDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+const FlexDiv = styled.div`
+    display: flex;
+    column-gap: 5px;
+`;
+const ShareDiv = styled.div`
+    font-size: 16px;
+    font-weight: 600;
+    margin: 3px 0 0 8px;
+`;
+const TopDiv = styled.div`
+    height: 170px;
+    padding: 0 15px 0 15px;
+`;
+const AdjustDiv = styled.div`
+    padding-top: 25px;
+    height: 25px;
+`;
+const TopDivOne = styled.div`
+    position: relative;
+    height: 300px;
+    padding-top: 50px;
+`;
+const TopDivTwo = styled.div`
+    height: 30px;
+    text-align: left;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 600;
+`;
+const TopDivThree = styled.div`
+    height: auto;
+    padding: 10px 10px 10px 10px;
+`;
+const Button = styled.button`
+    width: 13rem;
+    height: 47px;
+    font-weight: 600;
+    background-color: #1da1f2;
+    color: #fff;
+    fill: #fff;
+    border: none;
+    border-radius: 10px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+    &:hover {
+        background-color: rgb(41, 98, 255, 0.8);
+    }
+`;
+
+const BigButton = styled.button`
+    width: 99.98%;
+    height: 70px;
+    font-weight: 600;
+    background-color: #f5f7fa;
+    //   color: #fff;
+    //   fill: #fff;
+    border: none;
+    border-radius: 10px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+    &:hover {
+        background-color: rgb(rgb(245, 247, 250, 0.5));
+        border: 1px solid #e5e7eb;
+    }
+`;
+const TransperentButton = styled.button`
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    width: 50px;
+    height: 42px;
+    background: none;
+    color: #000000;
+    fill: black;
+    border: none;
+    border-radius: 10px;
+    padding-right: 1rem;
+    cursor: pointer;
+    &:hover {
+        background-color: #fff;
+    }
+`;
+const InnerFlexBox = styled.div`
+    width: 100%;
+    height: auto;
+    text-align: left;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #e5e7eb;
+    color: #409e5c;
+    font-weight: 600;
+`;
+const Image = styled.img`
+    width: 40px;
+    margin-top: 20px;
+    margin-bottom: 4vh;
+    cursor: pointer;
+    &:hover {
+        background-color: #fff;
+    }
+`;
+const H3 = styled.div`
+    font-weight: 700;
+    margin-top: 25px;
+`;
+const CircleDiv = styled.div`
+    width: 40px;
+    height: 32px;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    background-color: #fff;
+    padding-top: 8px;
+`;
+const NormalDiv = styled.div`
+    width: 150px;
+    height: 32px;
+    padding-top: 12px;
+    font-size: 18px;
+`;

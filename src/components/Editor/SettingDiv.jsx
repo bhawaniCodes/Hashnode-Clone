@@ -11,9 +11,9 @@ export const SettingDiv = ({
     paragraphCount,
     readTime,
     publishBlog,
+    showTags,
 }) => {
-    console.log('paragraphCount:', paragraphCount);
-    
+
     return (
         <>
             <SettingMainDiv>
@@ -39,7 +39,7 @@ export const SettingDiv = ({
                             </p>
                         </div>
                     </CloseButtonToPublish>
-                    {paragraphCount !== 0 ? (
+                    {showTags ? (
                         <SettingCard>
                             <h3>Story Stats</h3>
                             <StoryStatDiv>

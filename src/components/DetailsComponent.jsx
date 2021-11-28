@@ -2,17 +2,29 @@ import React from "react";
 import styles from "./DetailsComponent.module.css";
 import ReactMarkdown from "react-markdown";
 import styled from "styled-components";
+import { useHistory, useParams } from "react-router";
 
 const MainDiv = styled.div`
-    & > :nth-child(1) {
-        width: 700px;
-    }
+cursor: pointer;
+     & > :nth-child(1),:nth-child(2) {
+         width: 1000px;
+         height: 300px
+     }
 `;
 
-function DetailsComponent({ title, body, coverUrl, subTitle }) {
-    console.log("title,body,coverUrl:", title, body, coverUrl, subTitle);
+function DetailsComponent({ title, body, coverUrl, subTitle, _id }) {
+    console.log("title,body,coverUrl:", title, body.length, coverUrl, subTitle, _id);
+    let newBody = [];
+    for (let i = 0; i < 250; i++) {
+        newBody[i] = body[i];
+    }
+    const history = useHistory();
+    const GotoBlog = (_id) => {
+        history.push(`/myblog/${_id}`);
+    }
+
     return (
-        <MainDiv>
+        <MainDiv onClick={() => GotoBlog(_id)}>
             <div>
                 <FlexBox>
                     <InnerFlexBox>
@@ -20,7 +32,9 @@ function DetailsComponent({ title, body, coverUrl, subTitle }) {
                             <HeadTitle>{title}</HeadTitle>
                             <SubTitle>{subTitle}</SubTitle>
                             <BodyDiv>
-                                <ReactMarkdown>{body}</ReactMarkdown>
+                                <ReactMarkdown>
+                                    {newBody.join("")}
+                                </ReactMarkdown>
                             </BodyDiv>
                         </ContentDiv>
                     </InnerFlexBox>
@@ -34,22 +48,6 @@ function DetailsComponent({ title, body, coverUrl, subTitle }) {
                     </HeadFlexSide>
                 </FlexBox>
             </div>
-
-            {/* <MainDiv className={styles.mainCont}>
-                <div className={styles.mainContInside}>
-                    <h2>{title}</h2>
-                    <ReactMarkdown>{body}</ReactMarkdown>
-                </div>
-                <div>
-                    <img
-                        className={styles.img1}
-                        src={coverUrl}
-                        width="345"
-                        height="160"
-                        alt="mern"
-                    />
-                </div>
-            </MainDiv> */}
         </MainDiv>
     );
 }
@@ -66,56 +64,102 @@ const SubTitle = styled.div`
 
 const ContentDiv = styled.div`
     width: 100%;
-    max-height: 180px;
-    white-space: wrap;
-    overflow: hidden;
+    max-height: 200px;
+    
     
 `;
 const BodyDiv = styled.div`
+    text-align: left;
     & > {
         margin: 0;
     }
     & > p {
         text-overflow: ellipsis;
+        overflow: hidden;
+        // Addition lines for 2 line or multiline ellipsis
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+        & > img {
+            display: none;
+        }
     }
 
     & > h1 {
         margin: 0px;
-        font-size: 1.4rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        // Addition lines for 2 line or multiline ellipsis
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+
+        font-weight: 700;
+        font-size: 24px;
+        word-spacing: 0.5px;
+        color: #333333;
     }
     & > h2 {
         margin: 0px;
-        font-size: 1.2rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        // Addition lines for 2 line or multiline ellipsis
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+
+        font-weight: 600;
+        font-size: 22px;
+        word-spacing: 0.5px;
+        color: #333333;
     }
     & > h3 {
         margin: 0px;
-        font-size: 1rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        // Addition lines for 2 line or multiline ellipsis
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+
+        font-weight: 500;
+        font-size: 20px;
+        word-spacing: 0.5px;
+        color: #333333;
     }
 `;
 
 const HeadFlexSide = styled.div`
+    
     display: flex;
     align-items: center;
+    &>img{
+        width:100%;
+        height: 100%;
+    }
 `;
 
 const FlexBox = styled.div`
     display: flex;
-    border: 1px solid black;
     max-height: 200px;
     padding: 1rem;
+    column-gap: 20px;
 
     overflow: hidden;
     width: 100%;
-    height: auto;
+    height: 300px;
     margin: auto;
-    margin-top: 50px;
     text-align: left;
     //   padding: 20px 20px 20px 20px;
     justify-content: space-between;
 `;
 const InnerFlexBox = styled.div`
-    width: 55%;
-    height: auto;
+    width: 80%;
+    height: 300px;
     text-align: left;
     justify-content: space-between;
 
@@ -126,8 +170,8 @@ const HeadTitle = styled.div`
     margin: 0px;
     padding: 0px;
     text-align: left;
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: 700;
+    font-size: 25px;
     word-spacing: 0.5px;
     color: #333333;
 `;

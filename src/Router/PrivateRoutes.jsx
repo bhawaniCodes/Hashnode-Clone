@@ -1,18 +1,21 @@
 import { Redirect, Route } from "react-router-dom";
 import React, { useEffect } from "react";
-
+import { getWithExpiry } from "../components/checkExpiry";
 
 export const PrivateRoutes = ({ children, path }) => {
-    let user = JSON.parse(localStorage.getItem("user"));
-    console.log("user:", user);
+    
 
-    if (user) {
+    // for check expiry of Token
+    const expiry = getWithExpiry("expiry");
+    console.log("expiry:", expiry);
+
+    if (expiry) {
         return (
             <Route exact path={path}>
                 {children}
             </Route>
         );
     } else {
-        return <Redirect to='/login' />
+        return <Redirect to="/login" />;
     }
 };

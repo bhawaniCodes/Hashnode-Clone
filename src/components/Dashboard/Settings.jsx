@@ -1,5 +1,5 @@
 import BlogDashboard from "./BlogDashboard";
-import Sidebar from "./Sidebar";
+import Sidebar from "../Sidebar";
 import DashboardCard from "./DashboardCard";
 import DashboardSidebar from "./DashboardSidebar";
 import { GeneralSetting } from "./GeneralSetting";
@@ -17,8 +17,17 @@ const Divdiv = styled.div`
 
 function Settings() {
     return (
-        <div style={{ textAlign: "left" }}>
-            <Sidebar />
+        <div >
+            <div
+                style={{
+                    paddingLeft: "30px",
+                    position: "fixed",
+                    zIndex: "5",
+                    marginTop: "20px",
+                }}
+            >
+                <Sidebar />
+            </div>
             <BlogDashboard />
             <DashboardCard />
             <DashboardSidebar />

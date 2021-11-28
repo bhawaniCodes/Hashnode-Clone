@@ -1,13 +1,22 @@
 import BlogDashboard from "./BlogDashboard";
-import Sidebar from "./Sidebar";
+import Sidebar from "../Sidebar";
 import DashboardCard from "./DashboardCard";
 import DashboardSidebar from "./DashboardSidebar";
 import "./Dashboard.css";
 
 function Posts() {
   return (
-      <div className="App" >
-          <Sidebar />
+      <div className="App">
+          <div
+              style={{
+                  paddingLeft: "30px",
+                  position: "fixed",
+                  zIndex: "5",
+                  marginTop: "20px",
+              }}
+          >
+              <Sidebar />
+          </div>
           <BlogDashboard />
           <DashboardCard />
           <DashboardSidebar />

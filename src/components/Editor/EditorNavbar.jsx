@@ -13,13 +13,14 @@ export const EditorNavbar = ({
     wordCount,
     paragraphCount,
     readTime,
+    showTags,
 }) => {
     const [settingDisplay, setSettingDisplay] = useState(false);
 
     return (
         <>
             <HeaderDiv>
-                <Link to="/index">
+                <Link to="/">
                     <NewLogo width="128px" height="21.95px" />
                 </Link>
                 <div>
@@ -55,6 +56,7 @@ export const EditorNavbar = ({
                         readTime={readTime}
                         setSettingDisplay={setSettingDisplay}
                         publishBlog={publishBlog}
+                        showTags={showTags}
                     />
                 ) : null}
             </HeaderDiv>
