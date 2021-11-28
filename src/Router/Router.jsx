@@ -25,13 +25,14 @@ const commonUrl = process.env.REACT_APP_COMMON_URL;
 export const Router = () => {
     const location = useLocation();
     const history = useHistory();
-    const expiry = getWithExpiry("expiry");
+    let expiry = getWithExpiry("expiry");
     console.log("expiry:", expiry);
 
     if (localStorage.getItem("user")) {
         const now = new Date();
         localStorage.setItem("expiry", JSON.stringify(now.getTime() + 3000000));
     }
+    
 
     // const logout = async () => {
     //     await auth.signOut();
@@ -58,6 +59,7 @@ export const Router = () => {
                 "expiry",
                 JSON.stringify(now.getTime() + 60000000)
             );
+            expiry = getWithExpiry("expiry");
             localStorage.setItem("user", JSON.stringify(token));
         }
     }
