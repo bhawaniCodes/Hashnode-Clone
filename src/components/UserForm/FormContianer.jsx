@@ -68,7 +68,7 @@ function FormContainer() {
 
 
     const getUser = async () => {
-        const res = await axios.get(`http://localhost:2266/users`, {
+        const res = await axios.get(`${process.env.REACT_APP_COMMON_URL}/users`, {
             headers: {
                 authorization: `Bearer ${token}`,
             },
@@ -104,11 +104,15 @@ function FormContainer() {
         userData.skill = savedSkill;
         userData.avatar = profileImage;
         userData.coverImage = coverImage
-        await axios.patch(`http://localhost:2266/users`, userData, {
-            headers: {
-                authorization: `Bearer ${token}`,
-            },
-        });
+        await axios.patch(
+            `${process.env.REACT_APP_COMMON_URL}/users`,
+            userData,
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            }
+        );
         getUser();
     };
 
