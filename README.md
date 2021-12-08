@@ -1,4 +1,4 @@
-# Boat-Lifestyle Clone :smile:
+# Hashnode Clone :smile:
 
 #### This clone was made using 
 1) ReactJS for the frontend
